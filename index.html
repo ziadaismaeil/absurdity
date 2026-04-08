@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OVERLAP CITY</title>
+<title>OVERLAP CITY — Weimar</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: white; }
 
-/* ── Top bar ─────────────────────────────────────────── */
 #topbar {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; align-items: center; justify-content: center;
@@ -40,7 +39,6 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 .r-btn.active[data-r="infra"]   { background: rgba(64,207,255,0.22); }
 .r-btn.active[data-r="feeling"] { background: rgba(255,119,153,0.22); }
 
-/* ── Title ───────────────────────────────────────────── */
 #title-block {
   position: fixed; top: 14px; left: 16px; z-index: 100; pointer-events: none;
 }
@@ -50,14 +48,13 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 }
 #r-desc {
   font-size: 9px; letter-spacing: 2px; color: #888;
-  margin-top: 5px; line-height: 1.6; max-width: 210px;
+  margin-top: 5px; line-height: 1.6; max-width: 230px;
   transition: color 0.6s;
 }
 
-/* ── Info panel ──────────────────────────────────────── */
 #info-panel {
   position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
-  width: 250px; background: rgba(0,0,0,0.88);
+  width: 260px; background: rgba(0,0,0,0.88);
   border: 1px solid #2a2a2a; padding: 18px;
   z-index: 100; display: none; line-height: 1.8;
 }
@@ -66,7 +63,7 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
   margin-bottom: 14px; padding-bottom: 8px;
   border-bottom: 1px solid #1e1e1e;
 }
-.i-row { font-size: 10px; margin-bottom: 5px; display: flex; gap: 6px; }
+.i-row { font-size: 10px; margin-bottom: 6px; display: flex; gap: 6px; }
 .i-tag { font-size: 8px; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; opacity: 0.8; }
 .i-val { color: #bbb; }
 #close-btn {
@@ -76,7 +73,6 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 }
 #close-btn:hover { color: #fff; }
 
-/* ── Bottom bar ──────────────────────────────────────── */
 #bottombar {
   position: fixed; bottom: 0; left: 0; right: 0;
   display: flex; align-items: center; justify-content: center;
@@ -101,10 +97,10 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 }
 #hint { font-size: 9px; letter-spacing: 1px; color: #333; pointer-events: none; }
 
-/* ── Floating labels ─────────────────────────────────── */
 #labels { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
 .blabel {
-  position: absolute; font-size: 9px; letter-spacing: 1px;
+  position: absolute;
+  font-size: 9px; letter-spacing: 1px;
   background: rgba(0,0,0,0.65); padding: 2px 7px;
   border-left: 2px solid; white-space: nowrap;
   transform: translateX(-50%);
@@ -112,7 +108,6 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
   pointer-events: none;
 }
 
-/* ── Constraint panel ────────────────────────────────── */
 #meta-btn {
   position: fixed; bottom: 50px; left: 16px;
   font: 9px/1 'Courier New', monospace;
@@ -124,7 +119,7 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 #meta-btn:hover { color: #888; }
 #meta-panel {
   position: fixed; left: 40px; top: 50%; transform: translateY(-50%);
-  width: 270px; background: rgba(0,0,0,0.92);
+  width: 280px; background: rgba(0,0,0,0.92);
   border: 1px solid #1c1c1c; padding: 20px;
   z-index: 100; display: none;
   font-size: 9px; line-height: 2.2; color: #555;
@@ -137,8 +132,8 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 <body>
 
 <div id="title-block">
-  <h1>OVERLAP CITY</h1>
-  <div id="r-desc">the same place / five different worlds</div>
+  <h1>WEIMAR / OVERLAP</h1>
+  <div id="r-desc">five realities of the same city</div>
 </div>
 
 <div id="topbar">
@@ -164,23 +159,21 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 <button id="meta-btn" onclick="toggleMeta()">CONSTRAINT MACHINE</button>
 
 <div id="meta-panel">
-  <h3>EVERY ELEMENT / MULTIPLE READS</h3>
-  <div class="m-el">THE BUILDINGS</div>
-  <div class="m-reads">→ landmarks / memories / ruins / nodes / affects</div>
-  <div class="m-el">THE GROUND</div>
-  <div class="m-reads">→ road / soil / substrate / data floor / emotional terrain</div>
-  <div class="m-el">THE GRID</div>
-  <div class="m-reads">→ city plan / prison bars / neural net / musical staff / memory map</div>
+  <h3>WEIMAR / EVERY ELEMENT REREAD</h3>
+  <div class="m-el">THE CHURCH TOWER (Herderkirche)</div>
+  <div class="m-reads">→ landmark / the one everyone passes / Luther's pulpit / fire risk zone / 500 years of guilt</div>
+  <div class="m-el">THE FLAT AREA (Marktplatz)</div>
+  <div class="m-reads">→ tourist photo spot / Saturday market / medieval square / drainage node / real joy</div>
+  <div class="m-el">THE PARK STRIP (Ilm)</div>
+  <div class="m-reads">→ scenic walk / dog walking route / Grand Duke's garden / green corridor / solitude</div>
   <div class="m-el">THE FOG</div>
-  <div class="m-reads">→ weather / forgetting / privacy / signal loss / numbness</div>
-  <div class="m-el">THE CAMERA</div>
-  <div class="m-reads">→ tourist viewfinder / local gaze / surveillance / ghost sight / empathy lens</div>
-  <div class="m-el">THE HEIGHT</div>
-  <div class="m-reads">→ floors / importance / age / data load / emotional weight</div>
-  <div class="m-el">THE COLOR</div>
-  <div class="m-reads">→ materials / familiarity / spectral residue / signal type / raw affect</div>
+  <div class="m-reads">→ Thuringian mist / forgetting / Buchenwald smoke / signal loss / numbness</div>
+  <div class="m-el">THE PALACE (Stadtschloss)</div>
+  <div class="m-reads">→ UNESCO heritage / where nobody goes inside / Goethe's court / civic property / inherited shame</div>
+  <div class="m-el">THE GRID</div>
+  <div class="m-reads">→ city plan / Bauhaus grid / occupation zone map / utility network / memory structure</div>
   <div class="m-el">THE BLEED SLIDER</div>
-  <div class="m-reads">→ transition / contamination / blurred identity / signal bleed / empathy</div>
+  <div class="m-reads">→ time travel / amnesia / identity blur / frequency drift / empathy</div>
 </div>
 
 <div id="bottombar">
@@ -196,64 +189,388 @@ body { overflow: hidden; background: #000; font-family: 'Courier New', monospace
 <script>
 'use strict';
 
-// ── Seeded RNG (LCG) ─────────────────────────────────────────────────────────
-let _s = 31337;
+// ── Seeded RNG ────────────────────────────────────────────────────────────────
+let _s = 99991;
 const rng  = () => { _s = Math.imul(1664525, _s) + 1013904223 | 0; return (_s >>> 0) / 2**32; };
-const rngI = (a, b) => Math.floor(rng() * (b - a + 1)) + a;
 const pick  = arr => arr[Math.floor(rng() * arr.length)];
 
-// ── Name banks ───────────────────────────────────────────────────────────────
+// ── Weimar name banks (for non-landmark buildings) ────────────────────────────
 const BANK = {
   tourist: [
-    "Grand Hotel Imperiale","Central Museum","Victory Square","Panorama Tower",
-    "Historic Cathedral","The Famous Bridge","Night Market","The Old Fountain",
-    "Art Gallery","Souvenir District","The Photo Spot","Luxury Spa","Heritage Walk",
-    "Scenic Overlook","The Palace","Clock Tower","Harbour View","The Bronze Statue",
-    "Walking Tour Start","Rooftop Bar"
+    "Goethe-Nationalmuseum","Schillers Wohnhaus","Bauhaus-Museum",
+    "Herzogin Anna Amalia Bibliothek","Wittumspalais","Liszt-Haus",
+    "Nietzsche-Archiv","Fürstengruft","Cranach-Haus","Historischer Friedhof",
+    "Jakobskirche","Weimarhalle","Hotel Elephant","Goethes Gartenhaus",
+    "Belvedere Allee","Goethe-Schiller-Denkmal","Stadtkirche",
+    "Ilmpark Promenade","Römisches Haus","Wittumssaal"
   ],
   local: [
-    "where Nadia got married","the building they tore down in '98","Uncle Petros's corner",
-    "where the flood reached","Marta's bakery (closed)","the alley with the cats",
-    "where we slept through the blackout","grandmother's old street","where the market was",
-    "the wall they painted over","the good coffee place, RIP","everyone cuts through here",
-    "the kids' football pitch","where the riot started","the forgotten garden",
-    "Mrs. Ozan's roof","the shortcut everyone pretends not to know","the tree that used to be here",
-    "where the stray dog lived","the corner that smells like rain"
+    "die Gasse hinter dem Goethehaus","das Café das immer zu ist",
+    "der Park wenn man Ruhe braucht","der Markt am Samstag",
+    "das Gebäude das seit Jahren renoviert wird","die Stelle wo die Ilm überflutet",
+    "wo die Studenten sitzen wenn es warm ist","der Laden der früher besser war",
+    "unser Stammlokal bis sie die Preise erhöht haben","die Abkürzung durch den Hof",
+    "die Bank wo die Alten sitzen","die Trambahn die nie kommt",
+    "der Bahnhof wo man nach Erfurt muss","das alte Kino schon lange zu",
+    "wo die Kinder Fußball spielen","der Hinterhof den nur wir kennen",
+    "die Straße die nachts leer ist","der Berg wo Buchenwald war",
+    "die Bibliothek die gebrannt hat","das Haus das eigentlich schön war"
   ],
   ghost: [
-    "Factory No. 3 (1924–1971)","Ottoman Garrison (1650s)","Plague Memorial (1348)",
-    "First Cinema Hall (1911)","Workers' Housing (1952)","Jewish Quarter (demolished 1942)",
-    "Roman Forum (buried 60m down)","Great Fire Site (1887)","Resistance HQ (1943–45)",
-    "Printing House (1820–1964)","Public Bathhouse (1890s)","Monastery Grounds (1200–1850)",
-    "Field Hospital (WWI)","First Airport Terminal (1935)","The Flood Line (1963)",
-    "Mass Grave (unmarked)","Gladiator Arena (buried)","Slave Market (1400s)",
-    "Execution Square (repaved)","The Palace Before This One"
+    "Weimarer Republik 1919 — hier gegründet","Goethe stirbt hier, 22. März 1832",
+    "Bauhaus-Gründung 1919 — Gropius","Luther predigt in der Stadtkirche 1525",
+    "Schiller stirbt arm hier, 9. Mai 1805","NSDAP-Treffen 1926 — erste Hochburg",
+    "Herzogin Anna Amalia 1772 — Klassik beginnt","Brand der Bibliothek 2004 — 50.000 Bücher",
+    "Bombenangriff 9. Februar 1945","DDR-Parade Theaterplatz 1968",
+    "Buchenwald 1937–1945 (11 km nördlich)","Liszt dirigiert hier 1848",
+    "Nietzsche-Archiv 1894 — Texte verfälscht","Großherzog holt Goethe 1775",
+    "Cranach d.Ä. malt hier 1552","Mittelalterlicher Markt 14. Jh.",
+    "Römerstraße unter dem Pflaster 3. Jh.","Erster Weltkrieg Lazarett 1914",
+    "Reichskristallnacht-Pogrom Weimar 1938","GDR: Nationale Volksarmee 1960"
   ],
   infra: [
-    "Node A-7 / Substation 12","Water Main Junction W-4","Fiber Optic Hub",
-    "Traffic Control Zone C","Sewage Processing Node","Emergency Services Sector 4",
-    "Power Grid Distribution","Gas Pipeline Intersection","Data Center Cluster",
-    "Waste Collection Route 7","Storm Drain Basin","Telecom Tower Base",
-    "Metro Ventilation Shaft","Heat Exchange Unit","Surveillance Cluster",
-    "Load Zone LB-2","Fire Suppression Grid","Radiation Monitor A","Soil Sensor Array","CCTV Hub"
+    "Stadtwerke Weimar / Knoten SW-3","Tram Linie 1 / Haltestelle Goetheplatz",
+    "Wasserwerk / Zufluss Ilm","Feuerwache 1 / Weimar Mitte",
+    "Glasfaser-Hub / Telekom Weimar","Kläranlage / Abfluss Ilm",
+    "Stromverteiler / Thüringer Energie","Wärmenetz / Stadtwerke Süd",
+    "Verkehrsleitzentrale / B7 B85","Mobilfunkturm / Vodafone Weimar",
+    "Tiefgarage Zentrum / P2","ZOB / Busbahnhof Weimar",
+    "Regenwasserkanal / Ilm-Einzugsgebiet","Überwachungscluster / Altstadt",
+    "Fernwärme / Verteilerstation 4","Abwasserhauptleitung / Jakobsplan",
+    "Solarnetz / Dachflächen Registrierung","Baudenkmal / Statik-Monitoring",
+    "Notfallnetz / Katastrophenschutz","Kanalisation / Mittelalterlicher Untergrund"
   ],
   feeling: [
-    "Longing (pop. 847)","Unease (threshold)","Collective Joy",
-    "Private Grief","Anonymous Lust","Nostalgic Residue",
-    "Ambient Dread","Unexpected Warmth","Territorial Anger",
-    "Borrowed Comfort","Civic Pride (fading)","Shared Shame (unnamed)",
-    "Hope (conditional)","Boredom (concentrated)","Displaced Tenderness",
-    "Displaced Rage","The Weight of Not Saying","Guilt By Proximity",
-    "Joy No One Claims","A Feeling Without a Name"
+    "Der Schatten von Buchenwald","Stolz den man sich nicht traut",
+    "Zu schön und zu schuldig","Die Republik die hier scheiterte",
+    "Bauhaus-Optimismus (archiviert)","Goethe-Müdigkeit",
+    "Touristenüberdruss (chronisch)","Renovierungserschöpfung",
+    "Der Park im Winter allein","Was das Feuer nahm (2004)",
+    "Kleine Stadt enormer Schatten","Nietzsche — das Unbehagen",
+    "Samstagmarkt-Freude (echt)","Die Bahn ist wieder zu spät",
+    "Wiedervereinigungsambivalenz","Das Erbe das man nicht ablegen kann",
+    "Wo Deutsche Kultur erfunden wurde (angeblich)","Postsozialistischer Leerstand",
+    "Anonyme Trauer ohne Datum","Schiller starb arm hier"
   ]
 };
 
 const FEELING_HEX = [
-  0x2244BB,0x884400,0xEECC00,0x112244,0xFF1166,0x9977DD,
-  0x330800,0xFF8833,0xFF2200,0x77BBAA,0x0077EE,0x441111,
-  0x00EE77,0x888888,0xEE77AA,0xAA1100,0x334455,0x550033,
-  0x005522,0x222222
+  0x1A1A44, 0x442200, 0xCC9900, 0x111133, 0xFF0044, 0x7755BB,
+  0x1A0500, 0xDD6622, 0xCC1100, 0x557766, 0x005599, 0x332222,
+  0x00AA55, 0x666666, 0xBB5577, 0x881100, 0x223344, 0x330022,
+  0x004422, 0x1A1A1A
 ];
+
+// ── Weimar landmark overrides at specific grid positions ──────────────────────
+// Grid is 14×14. x=0 west, x=13 east. z=0 north, z=13 south.
+// Weimar layout: Herderplatz north, Theaterplatz south, Ilm park east
+const LANDMARKS = {
+  // ── Herderkirche — dominant church tower north of centre
+  '7_3': {
+    names: {
+      tourist:  'Herderkirche (St. Peter und Paul)',
+      local:    'die alte Kirche — man geht dran vorbei',
+      ghost:    'Stadtkirche 1500 — Luther predigt hier 1525',
+      infra:    'Baudenkmal A / Blitzschutzzone / Turmstatik',
+      feeling:  'Protestantische Schuld (500 Jahre, ungelöst)'
+    },
+    heights: { tourist: 16, local: 14, ghost: 22, infra: 16, feeling: 9 },
+    colors:  {
+      tourist: new THREE.Color(0xD4B483),
+      local:   new THREE.Color(0x8A7355),
+      ghost:   new THREE.Color(0x7744AA),
+      infra:   new THREE.Color(0x1155AA),
+      feeling: new THREE.Color(0x441122),
+    }
+  },
+  // ── Anna Amalia Bibliothek
+  '8_5': {
+    names: {
+      tourist:  'Herzogin Anna Amalia Bibliothek (UNESCO)',
+      local:    'die Bibliothek die 2004 gebrannt hat',
+      ghost:    'Brand der Bibliothek, 2. Sept. 2004 — 50.000 Bücher',
+      infra:    'Brandschutzzone / Klimaanlage Archiv / Sensorik',
+      feeling:  'Was das Feuer nahm (das Vergessen eines Verlustes)'
+    },
+    heights: { tourist: 5, local: 5, ghost: 3, infra: 5, feeling: 7 },
+    colors:  {
+      tourist: new THREE.Color(0xC8A46E),
+      local:   new THREE.Color(0x776655),
+      ghost:   new THREE.Color(0xAA3300),
+      infra:   new THREE.Color(0x225588),
+      feeling: new THREE.Color(0x882200),
+    }
+  },
+  // ── Marktplatz — open square, very low
+  '7_6': {
+    names: {
+      tourist:  'Marktplatz Weimar',
+      local:    'der Markt am Samstag — Gemüse, Kaffee, Klatsch',
+      ghost:    'Mittelalterlicher Markt 14. Jh. — NSDAP-Aufmarsch 1926',
+      infra:    'Öffentlicher Platz / Entwässerungsknoten / CCTV-Cluster',
+      feeling:  'Samstagmarkt-Freude (echt, kurz, wiederkehrend)'
+    },
+    heights: { tourist: 0.3, local: 0.3, ghost: 0.5, infra: 0.3, feeling: 0.3 },
+    colors:  {
+      tourist: new THREE.Color(0x999988),
+      local:   new THREE.Color(0x667755),
+      ghost:   new THREE.Color(0x332233),
+      infra:   new THREE.Color(0x223344),
+      feeling: new THREE.Color(0x886600),
+    }
+  },
+  // ── Rathaus
+  '7_7': {
+    names: {
+      tourist:  'Rathaus Weimar (16. Jh.)',
+      local:    'das Rathaus — man geht rein für Formulare',
+      ghost:    'Stadtrat 1919 — erste demokratische Sitzung',
+      infra:    'Verwaltungsknoten / Stadtserver / Archiv-Keller',
+      feeling:  'Bürokratische Erschöpfung (generationenübergreifend)'
+    },
+    heights: { tourist: 6, local: 5, ghost: 7, infra: 6, feeling: 5 },
+    colors:  {
+      tourist: new THREE.Color(0xBFA06A),
+      local:   new THREE.Color(0x6A5A44),
+      ghost:   new THREE.Color(0x664488),
+      infra:   new THREE.Color(0x114466),
+      feeling: new THREE.Color(0x443322),
+    }
+  },
+  // ── Stadtschloss — large palace, east of centre
+  '10_6': {
+    names: {
+      tourist:  'Stadtschloss Weimar (Residenzschloss)',
+      local:    'das Schloss — war immer da, kümmert uns nicht',
+      ghost:    'Herzogtum Sachsen-Weimar — Goethe am Hof 1775–1832',
+      infra:    'Baudenkmal A+ / Heizung Denkmalschutz / Statik-Monitor',
+      feeling:  'Ererbte Grandezza (niemand weiß wohin damit)'
+    },
+    heights: { tourist: 8, local: 7, ghost: 10, infra: 8, feeling: 6 },
+    colors:  {
+      tourist: new THREE.Color(0xE2C98A),
+      local:   new THREE.Color(0x887755),
+      ghost:   new THREE.Color(0x553377),
+      infra:   new THREE.Color(0x1A4466),
+      feeling: new THREE.Color(0x664433),
+    }
+  },
+  // ── Goethe-Haus
+  '9_7': {
+    names: {
+      tourist:  'Goethes Wohnhaus (Goethe-Nationalmuseum)',
+      local:    'das Goethe-Haus — Touristen, immer Touristen',
+      ghost:    'Goethe stirbt hier, Zimmer Nr. 3, 22. März 1832',
+      infra:    'Baudenkmal A / Klimatisierung Archiv / Kamera-Netz',
+      feeling:  'Goethe-Müdigkeit (kulturelle Überdosis)'
+    },
+    heights: { tourist: 5, local: 4, ghost: 6, infra: 5, feeling: 4 },
+    colors:  {
+      tourist: new THREE.Color(0xDDC070),
+      local:   new THREE.Color(0x7A6A44),
+      ghost:   new THREE.Color(0x886699),
+      infra:   new THREE.Color(0x224488),
+      feeling: new THREE.Color(0x886633),
+    }
+  },
+  // ── Goethes Gartenhaus — park, very low
+  '11_8': {
+    names: {
+      tourist:  "Goethes Gartenhaus (Park an der Ilm)",
+      local:    'das Gartenhäuschen wo man mit dem Hund läuft',
+      ghost:    "Goethe zieht 1776 ein — sein erster Weimarer Wohnsitz",
+      infra:    'Parkzone / Ilm-Hochwasserpuffer / Grünflächenkataster',
+      feeling:  'Der Park im Winter allein (Stille ohne Bedeutung)'
+    },
+    heights: { tourist: 1.5, local: 1.5, ghost: 2, infra: 1.5, feeling: 2 },
+    colors:  {
+      tourist: new THREE.Color(0xBBCCAA),
+      local:   new THREE.Color(0x556644),
+      ghost:   new THREE.Color(0x445533),
+      infra:   new THREE.Color(0x224433),
+      feeling: new THREE.Color(0x334422),
+    }
+  },
+  // ── Park an der Ilm — river park strip (very flat)
+  '12_7': {
+    names: {
+      tourist:  'Park an der Ilm (UNESCO, 48 ha)',
+      local:    'der Ilm-Park — Feierabend, Fahrrad, Frieden',
+      ghost:    'Großherzoglicher Garten 1778 — englischer Landschaftspark',
+      infra:    'Ilm-Flusszone / Überschwemmungsgebiet / Ökosensor',
+      feeling:  'Stille die man verdient hat'
+    },
+    heights: { tourist: 0.2, local: 0.2, ghost: 0.3, infra: 0.2, feeling: 0.2 },
+    colors:  {
+      tourist: new THREE.Color(0x99BB88),
+      local:   new THREE.Color(0x557744),
+      ghost:   new THREE.Color(0x334422),
+      infra:   new THREE.Color(0x113322),
+      feeling: new THREE.Color(0x224411),
+    }
+  },
+  '12_8': {
+    names: {
+      tourist:  'Ilm-Ufer Promenade',
+      local:    'wo die Ilm rauscht wenn es regnet',
+      ghost:    'Ilm-Überschwemmung 1613 — halbe Stadt vernichtet',
+      infra:    'Ilm / Pegelstation / Hochwasserwarnsystem',
+      feeling:  'Das Wasser das bleibt und das das weggeht'
+    },
+    heights: { tourist: 0.2, local: 0.2, ghost: 0.3, infra: 0.2, feeling: 0.4 },
+    colors:  {
+      tourist: new THREE.Color(0x88AACC),
+      local:   new THREE.Color(0x445566),
+      ghost:   new THREE.Color(0x223344),
+      infra:   new THREE.Color(0x112233),
+      feeling: new THREE.Color(0x224455),
+    }
+  },
+  // ── Theaterplatz — open square south
+  '5_8': {
+    names: {
+      tourist:  'Theaterplatz / Goethe-Schiller-Denkmal',
+      local:    'der Platz vor dem Theater — Studenten im Sommer',
+      ghost:    'Nationalsozialistische Kundgebung 1930 — selber Platz',
+      infra:    'Öffentlicher Platz / Event-Infrastruktur / CCTV',
+      feeling:  'Zwei Dichter auf einem Sockel (einer starb arm)'
+    },
+    heights: { tourist: 0.3, local: 0.3, ghost: 0.5, infra: 0.3, feeling: 0.3 },
+    colors:  {
+      tourist: new THREE.Color(0xAA9977),
+      local:   new THREE.Color(0x556644),
+      ghost:   new THREE.Color(0x332233),
+      infra:   new THREE.Color(0x223344),
+      feeling: new THREE.Color(0x664422),
+    }
+  },
+  // ── Nationaltheater
+  '5_9': {
+    names: {
+      tourist:  'Deutsches Nationaltheater Weimar',
+      local:    'das Theater — zu teuer jetzt, früher ging man noch',
+      ghost:    'Nationalversammlung 1919 — Weimarer Verfassung hier beschlossen',
+      infra:    'Eventknoten / Bühnentechnik / Brandschutz-Zone B',
+      feeling:  'Die Republik die hier geboren wurde und woanders starb'
+    },
+    heights: { tourist: 7, local: 6, ghost: 9, infra: 7, feeling: 8 },
+    colors:  {
+      tourist: new THREE.Color(0xCCB07A),
+      local:   new THREE.Color(0x7A6A55),
+      ghost:   new THREE.Color(0x664488),
+      infra:   new THREE.Color(0x1A3366),
+      feeling: new THREE.Color(0x882244),
+    }
+  },
+  // ── Schiller-Haus
+  '7_9': {
+    names: {
+      tourist:  "Schillers Wohnhaus (1802–1805)",
+      local:    'das Schillerhaus — weniger Touristen als Goethe, wenigstens',
+      ghost:    'Schiller stirbt hier arm, 9. Mai 1805, 45 Jahre alt',
+      infra:    'Baudenkmal B / Heizungsanlage historisch / Feuchtemessung',
+      feeling:  'Schiller starb arm hier (der andere bekam alles)'
+    },
+    heights: { tourist: 4, local: 4, ghost: 5, infra: 4, feeling: 6 },
+    colors:  {
+      tourist: new THREE.Color(0xBB9966),
+      local:   new THREE.Color(0x665544),
+      ghost:   new THREE.Color(0x775599),
+      infra:   new THREE.Color(0x224477),
+      feeling: new THREE.Color(0x773333),
+    }
+  },
+  // ── Bauhaus Museum
+  '4_9': {
+    names: {
+      tourist:  'Bauhaus Museum Weimar (2019)',
+      local:    'das neue Bauhaus-Ding — schön, aber wer braucht das',
+      ghost:    'Bauhaus-Schule 1919–1925 — Gropius gründet hier',
+      infra:    'Neubau 2019 / Glasfassade Sensorik / Klimaanlage',
+      feeling:  'Bauhaus-Optimismus (archiviert, gut konserviert, unanwendbar)'
+    },
+    heights: { tourist: 5, local: 4, ghost: 4, infra: 5, feeling: 4 },
+    colors:  {
+      tourist: new THREE.Color(0xEEEEDD),
+      local:   new THREE.Color(0x888877),
+      ghost:   new THREE.Color(0x336688),
+      infra:   new THREE.Color(0x335577),
+      feeling: new THREE.Color(0x334455),
+    }
+  },
+  // ── Liszt-Haus
+  '10_8': {
+    names: {
+      tourist:  'Liszt-Haus (Franz-Liszt-Gedenkstätte)',
+      local:    'das Liszt-Haus — immer geschlossen wenn man vorbeigeht',
+      ghost:    'Liszt dirigiert hier 1848–1861 — Weimarer Musikblüte',
+      infra:    'Baudenkmal B / Haustechnik historisch / Schallschutz',
+      feeling:  'Großartig gewesen sein (genügt manchmal)'
+    },
+    heights: { tourist: 4, local: 4, ghost: 5, infra: 4, feeling: 5 },
+    colors:  {
+      tourist: new THREE.Color(0xBBAA77),
+      local:   new THREE.Color(0x665544),
+      ghost:   new THREE.Color(0x664477),
+      infra:   new THREE.Color(0x223366),
+      feeling: new THREE.Color(0x553344),
+    }
+  },
+  // ── Nietzsche-Archiv
+  '9_10': {
+    names: {
+      tourist:  'Nietzsche-Archiv Weimar',
+      local:    'das Nietzsche-Haus — wir reden nicht gern drüber',
+      ghost:    'Schwester Elisabeth verfälscht Texte 1894 — Nazis nutzen es',
+      infra:    'Baudenkmal C / Archiv-Klimatisierung / Zutrittskontrolle',
+      feeling:  'Nietzsche — das Unbehagen (er wäre entsetzt gewesen)'
+    },
+    heights: { tourist: 4, local: 3, ghost: 5, infra: 4, feeling: 7 },
+    colors:  {
+      tourist: new THREE.Color(0xAA9966),
+      local:   new THREE.Color(0x554433),
+      ghost:   new THREE.Color(0x553366),
+      infra:   new THREE.Color(0x223355),
+      feeling: new THREE.Color(0x662222),
+    }
+  },
+  // ── Hauptbahnhof — west edge
+  '2_10': {
+    names: {
+      tourist:  'Weimar Hauptbahnhof (Bahnhof Weimar)',
+      local:    'der Bahnhof — Zug nach Erfurt, meistens zu spät',
+      ghost:    'Deportationszüge ab Weimar Güterbahnhof 1942–1944',
+      infra:    'DB-Knoten / Stellwerk / Oberleitungsnetz / S-Bahn',
+      feeling:  'Die Bahn ist wieder zu spät (strukturelle Hoffnungslosigkeit)'
+    },
+    heights: { tourist: 4, local: 4, ghost: 3, infra: 6, feeling: 3 },
+    colors:  {
+      tourist: new THREE.Color(0xAAAAAA),
+      local:   new THREE.Color(0x666655),
+      ghost:   new THREE.Color(0x440011),
+      infra:   new THREE.Color(0x335577),
+      feeling: new THREE.Color(0x444444),
+    }
+  },
+  // ── Buchenwald marker — north edge (camp is 11km away but casts shadow)
+  '8_0': {
+    names: {
+      tourist:  'Blick Richtung Ettersberg / Buchenwald (11 km)',
+      local:    'der Berg da oben — da war das Lager',
+      ghost:    'KZ Buchenwald 1937–1945 — 56.000 Tote auf dem Ettersberg',
+      infra:    'Gedenkstätte / Bundesbehörde / Sicherheitszone',
+      feeling:  'Der Schatten von Buchenwald (fällt auf alles)'
+    },
+    heights: { tourist: 1, local: 2, ghost: 20, infra: 1, feeling: 18 },
+    colors:  {
+      tourist: new THREE.Color(0xAAAAAA),
+      local:   new THREE.Color(0x445533),
+      ghost:   new THREE.Color(0x110000),
+      infra:   new THREE.Color(0x222222),
+      feeling: new THREE.Color(0x220000),
+    }
+  },
+};
 
 // ── City generation ───────────────────────────────────────────────────────────
 const GRID = 14, CELL = 5;
@@ -261,74 +578,94 @@ const city = [];
 
 for (let x = 0; x < GRID; x++) {
   for (let z = 0; z < GRID; z++) {
-    const base = rng() * 5.5 + 1.2;
-    const fi   = (x * 9 + z * 5) % FEELING_HEX.length;
-    city.push({
-      wx: (x - GRID/2 + 0.5) * CELL,
-      wz: (z - GRID/2 + 0.5) * CELL,
-      heights: {
-        tourist: base * (rng() * 0.5 + 0.7),
-        local:   base * (rng() * 0.3 + 0.85),
-        ghost:   base * (rng() * 2.8 + 0.15),
-        infra:   base * (rng() * 0.2  + 0.9),
-        feeling: base * (rng() * 1.6 + 0.25),
-      },
-      colors: {
-        tourist: new THREE.Color().setHSL(rng()*0.1+0.04,   0.55, 0.48+rng()*0.28),
-        local:   new THREE.Color().setHSL(rng()*0.15+0.27,  0.22, 0.38+rng()*0.22),
-        ghost:   new THREE.Color().setHSL(rng()*0.08+0.73,  0.45, 0.42+rng()*0.3),
-        infra:   new THREE.Color().setHSL(rng()*0.06+0.52,  0.9,  0.28+rng()*0.28),
-        feeling: new THREE.Color(FEELING_HEX[fi]),
-      },
-      names: {
-        tourist: pick(BANK.tourist),
-        local:   pick(BANK.local),
-        ghost:   pick(BANK.ghost),
-        infra:   pick(BANK.infra),
-        feeling: pick(BANK.feeling),
-      },
-      mesh: null,
-      edges: null,
-    });
+    const key = `${x}_${z}`;
+    const lm  = LANDMARKS[key];
+
+    // Park/Ilm strip: x >= 11, z 5–11 → very low
+    const isPark = (x >= 11 && z >= 5 && z <= 11);
+
+    if (lm) {
+      city.push({
+        wx: (x - GRID/2 + 0.5) * CELL,
+        wz: (z - GRID/2 + 0.5) * CELL,
+        heights: lm.heights,
+        colors:  lm.colors,
+        names:   lm.names,
+        mesh: null, edges: null,
+      });
+    } else {
+      // Generic Weimar building — warm ochre rowhouse palette
+      const base = isPark
+        ? rng() * 0.5 + 0.1   // park strip stays flat
+        : rng() * 3.5 + 1.0;  // normal Weimar rowhouse height
+
+      const fi = (x * 9 + z * 5) % FEELING_HEX.length;
+      city.push({
+        wx: (x - GRID/2 + 0.5) * CELL,
+        wz: (z - GRID/2 + 0.5) * CELL,
+        heights: {
+          tourist: base * (rng() * 0.3 + 0.85),
+          local:   base * (rng() * 0.2 + 0.9),
+          ghost:   base * (rng() * 1.8 + 0.2),
+          infra:   base * (rng() * 0.15 + 0.92),
+          feeling: base * (rng() * 1.2 + 0.3),
+        },
+        colors: {
+          // Tourist: warm ochre/sandstone — Thuringian building stone
+          tourist: new THREE.Color().setHSL(0.08 + rng()*0.06, 0.35 + rng()*0.15, 0.55 + rng()*0.2),
+          local:   new THREE.Color().setHSL(0.08 + rng()*0.08, 0.18 + rng()*0.1,  0.38 + rng()*0.18),
+          ghost:   new THREE.Color().setHSL(0.73 + rng()*0.08, 0.45, 0.38 + rng()*0.28),
+          infra:   new THREE.Color().setHSL(0.55 + rng()*0.06, 0.88, 0.25 + rng()*0.25),
+          feeling: new THREE.Color(FEELING_HEX[fi]),
+        },
+        names: {
+          tourist: pick(BANK.tourist),
+          local:   pick(BANK.local),
+          ghost:   pick(BANK.ghost),
+          infra:   pick(BANK.infra),
+          feeling: pick(BANK.feeling),
+        },
+        mesh: null, edges: null,
+      });
+    }
   }
 }
 
-// ── Three.js scene ───────────────────────────────────────────────────────────
+// ── Three.js scene ────────────────────────────────────────────────────────────
 const scene    = new THREE.Scene();
-const camera   = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 500);
+const camera   = new THREE.PerspectiveCamera(52, innerWidth/innerHeight, 0.1, 500);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(devicePixelRatio);
 renderer.setSize(innerWidth, innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
-// Ground
-const gndMat  = new THREE.MeshLambertMaterial({ color: 0x666666 });
+// Ground — Weimar cobblestone grey
+const gndMat  = new THREE.MeshLambertMaterial({ color: 0x8A8070 });
 const gndMesh = new THREE.Mesh(new THREE.PlaneGeometry(GRID*CELL*2, GRID*CELL*2), gndMat);
 gndMesh.rotation.x = -Math.PI/2;
 gndMesh.receiveShadow = true;
 scene.add(gndMesh);
 
-// Grid lines
-const gridHelper = new THREE.GridHelper(GRID*CELL, GRID, 0x333333, 0x222222);
+const gridHelper = new THREE.GridHelper(GRID*CELL, GRID, 0x666050, 0x444030);
 scene.add(gridHelper);
 
 // Lights
-const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambLight = new THREE.AmbientLight(0xffeedd, 0.55);
 scene.add(ambLight);
-const sun = new THREE.DirectionalLight(0xffffff, 0.85);
-sun.position.set(40, 90, 30);
+const sun = new THREE.DirectionalLight(0xfff0cc, 0.9);
+sun.position.set(30, 90, 20);
 sun.castShadow = true;
 scene.add(sun);
 
-// Fog & sky
-scene.fog = new THREE.Fog(0x87CEEB, 55, 160);
-renderer.setClearColor(0x87CEEB);
+// Fog — Thuringian mist
+scene.fog = new THREE.Fog(0xD4C8A8, 50, 160);
+renderer.setClearColor(0xD4C8A8);
 
-// ── Build meshes ─────────────────────────────────────────────────────────────
+// ── Build meshes ──────────────────────────────────────────────────────────────
 const allMeshes = [];
 city.forEach((b, i) => {
-  const geo  = new THREE.BoxGeometry(CELL * 0.77, 1, CELL * 0.77);
+  const geo  = new THREE.BoxGeometry(CELL * 0.76, 1, CELL * 0.76);
   const mat  = new THREE.MeshLambertMaterial({ color: b.colors.tourist });
   const mesh = new THREE.Mesh(geo, mat);
   mesh.position.set(b.wx, b.heights.tourist / 2, b.wz);
@@ -345,22 +682,22 @@ city.forEach((b, i) => {
   b.edges = edges;
 });
 
-// ── Reality definitions ───────────────────────────────────────────────────────
+// ── Reality config ────────────────────────────────────────────────────────────
 const REALITIES = ['tourist','local','ghost','infra','feeling'];
 const R_COLOR   = { tourist:'#FFD580', local:'#7EC8A0', ghost:'#CC88EE', infra:'#40CFFF', feeling:'#FF7799' };
 const R_DESC    = {
-  tourist:  'city as spectacle — curated, legible, photogenic',
-  local:    'city as body memory — worn paths, private meanings',
-  ghost:    'city as palimpsest — every place is also its past',
-  infra:    'city as system — flows, nodes, invisible forces',
-  feeling:  'city as emotion — collective affect, raw presence',
+  tourist:  'Weimar als Welterbe — Goethe, Schiller, Bauhaus, UNESCO',
+  local:    'Weimar als Alltag — Ilm, Samstagmarkt, Renovierungsstress',
+  ghost:    'Weimar als Palimpsest — Republik, Buchenwald, Brand, Verlust',
+  infra:    'Weimar als System — Tram 1, Stadtwerke, Ilm-Pipeline, B7',
+  feeling:  'Weimar als Last und Schönheit — zu viel Geschichte zum Tragen',
 };
 const ENV = {
-  tourist: { sky: 0x87CEEB, fog: 0xB8D8F0, fogN: 55, fogF: 160, gnd: 0x777777, amb: 0.5,  sunC: 0xfff0dd },
-  local:   { sky: 0x2C3C4E, fog: 0x1a2833, fogN: 35, fogF: 110, gnd: 0x2a3322, amb: 0.3,  sunC: 0xddeecc },
-  ghost:   { sky: 0x100018, fog: 0x0d0015, fogN: 18, fogF: 75,  gnd: 0x080010, amb: 0.15, sunC: 0xaa66ee },
-  infra:   { sky: 0x000E1A, fog: 0x000e1a, fogN: 22, fogF: 90,  gnd: 0x00101f, amb: 0.12, sunC: 0x00ccff },
-  feeling: { sky: 0x060010, fog: 0x060010, fogN: 18, fogF: 75,  gnd: 0x040008, amb: 0.08, sunC: 0xff3388 },
+  tourist: { sky: 0xD4C8A8, fog: 0xD4C8A8, fogN: 50, fogF: 160, gnd: 0x8A8070, amb: 0.55, sunC: 0xfff0cc },
+  local:   { sky: 0x3A4A3A, fog: 0x253025, fogN: 35, fogF: 110, gnd: 0x2A3322, amb: 0.32, sunC: 0xCCDDAA },
+  ghost:   { sky: 0x0D0010, fog: 0x0D0010, fogN: 15, fogF: 70,  gnd: 0x08000C, amb: 0.14, sunC: 0x9955CC },
+  infra:   { sky: 0x000E1A, fog: 0x000E1A, fogN: 22, fogF: 90,  gnd: 0x00101F, amb: 0.11, sunC: 0x00CCFF },
+  feeling: { sky: 0x050008, fog: 0x050008, fogN: 16, fogF: 70,  gnd: 0x030005, amb: 0.07, sunC: 0xFF2266 },
 };
 
 let currentR = 'tourist';
@@ -375,7 +712,6 @@ function setReality(r) {
   document.getElementById('r-desc').style.color = R_COLOR[r];
   document.getElementById('blend-next').textContent = '→ ' + nextR().toUpperCase();
   document.getElementById('blend-next').style.color = R_COLOR[nextR()];
-
   const e = ENV[r];
   renderer.setClearColor(e.sky);
   scene.fog.color.setHex(e.fog);
@@ -391,8 +727,8 @@ document.getElementById('blend-slider').addEventListener('input', e => {
   document.getElementById('blend-next').style.color = R_COLOR[nextR()];
 });
 
-// ── Camera controls ───────────────────────────────────────────────────────────
-let sph = { r: 68, theta: Math.PI * 0.32, phi: Math.PI * 0.27 };
+// ── Camera ────────────────────────────────────────────────────────────────────
+let sph = { r: 68, theta: Math.PI * 0.3, phi: Math.PI * 0.26 };
 let dragging = false, lastM = {x:0,y:0}, downM = {x:0,y:0};
 
 function updateCam() {
@@ -405,15 +741,12 @@ function updateCam() {
 }
 updateCam();
 
-renderer.domElement.addEventListener('mousedown', e => {
-  dragging = true;
-  lastM = downM = { x: e.clientX, y: e.clientY };
-});
+renderer.domElement.addEventListener('mousedown', e => { dragging = true; lastM = downM = {x:e.clientX,y:e.clientY}; });
 renderer.domElement.addEventListener('mousemove', e => {
   if (!dragging) return;
   sph.theta -= (e.clientX - lastM.x) * 0.006;
   sph.phi    = Math.max(0.07, Math.min(Math.PI/2.05, sph.phi + (e.clientY - lastM.y) * 0.006));
-  lastM = { x: e.clientX, y: e.clientY };
+  lastM = {x:e.clientX,y:e.clientY};
   updateCam();
 });
 renderer.domElement.addEventListener('mouseup', () => { dragging = false; });
@@ -422,7 +755,7 @@ renderer.domElement.addEventListener('wheel', e => {
   updateCam();
 }, { passive: true });
 
-// ── Raycasting & info panel ───────────────────────────────────────────────────
+// ── Raycasting ────────────────────────────────────────────────────────────────
 const rc = new THREE.Raycaster();
 const mv = new THREE.Vector2();
 
@@ -443,27 +776,23 @@ function showInfo(b) {
   document.getElementById('i-feeling').textContent = b.names.feeling;
 }
 
-// ── Floating labels ───────────────────────────────────────────────────────────
+// ── Labels ────────────────────────────────────────────────────────────────────
 const labelContainer = document.getElementById('labels');
-const labelEls = city.map((b, i) => {
+const labelEls = city.map(() => {
   const el = document.createElement('div');
   el.className = 'blabel';
   el.style.color = R_COLOR.tourist;
   el.style.borderLeftColor = R_COLOR.tourist;
-  el.textContent = b.names.tourist;
   labelContainer.appendChild(el);
   return el;
 });
-
 const _v3 = new THREE.Vector3();
 
 function updateLabels() {
   const sorted = city
     .map((b, i) => ({ b, i, d: camera.position.distanceTo(_v3.set(b.wx, 0, b.wz)) }))
     .sort((a, b) => a.d - b.d);
-
   city.forEach((_, i) => { labelEls[i].style.opacity = '0'; });
-
   sorted.slice(0, 14).forEach(({ b, i, d }) => {
     const h = b.mesh.scale.y;
     _v3.set(b.wx, h + 0.6, b.wz).project(camera);
@@ -471,7 +800,6 @@ function updateLabels() {
     const sx = (_v3.x * 0.5 + 0.5) * innerWidth;
     const sy = (-_v3.y * 0.5 + 0.5) * innerHeight;
     if (sx < 0 || sx > innerWidth || sy < 0 || sy > innerHeight) return;
-
     const el = labelEls[i];
     el.style.left = sx + 'px';
     el.style.top  = sy + 'px';
@@ -482,16 +810,15 @@ function updateLabels() {
   });
 }
 
-// ── Constraint machine panel ──────────────────────────────────────────────────
+// ── Meta panel ────────────────────────────────────────────────────────────────
 let metaOpen = false;
 function toggleMeta() {
   metaOpen = !metaOpen;
   document.getElementById('meta-panel').style.display = metaOpen ? 'block' : 'none';
 }
 
-// ── Animation loop ────────────────────────────────────────────────────────────
+// ── Animation ─────────────────────────────────────────────────────────────────
 const clock = new THREE.Clock();
-
 function lerp(a, b, t) { return a + (b - a) * t; }
 
 function animate() {
@@ -501,19 +828,16 @@ function animate() {
 
   city.forEach((b, i) => {
     const mesh = b.mesh;
-
-    // Height: lerp current → next via bleed
     const targetH = lerp(b.heights[currentR], b.heights[nr], bleed);
     mesh.scale.y  += (targetH - mesh.scale.y) * 0.075;
     mesh.position.y = mesh.scale.y / 2;
 
-    // Color: lerp toward blended target
     const blended = b.colors[currentR].clone().lerp(b.colors[nr], bleed);
-    mesh.material.color.lerp(blended, 0.065);
+    mesh.material.color.lerp(blended, 0.06);
 
-    // Feeling: buildings breathe
     if (currentR === 'feeling' || (nr === 'feeling' && bleed > 0.1)) {
-      const breathe = lerp(1, 1 + Math.sin(t * 1.4 + i * 0.5) * 0.07, currentR === 'feeling' ? 1 - bleed : bleed);
+      const amt = currentR === 'feeling' ? 1 - bleed : bleed;
+      const breathe = lerp(1, 1 + Math.sin(t * 1.4 + i * 0.5) * 0.07, amt);
       mesh.scale.x = lerp(mesh.scale.x, breathe, 0.06);
       mesh.scale.z = lerp(mesh.scale.z, breathe, 0.06);
     } else {
@@ -521,26 +845,22 @@ function animate() {
       mesh.scale.z = lerp(mesh.scale.z, 1, 0.05);
     }
 
-    // Ghost: flicker opacity
     const ghostness = (currentR === 'ghost' ? 1 - bleed : 0) + (nr === 'ghost' ? bleed : 0);
     if (ghostness > 0.01) {
       mesh.material.transparent = true;
-      mesh.material.opacity = lerp(1, 0.55 + Math.sin(t * 3.5 + i * 0.9) * 0.2, ghostness);
+      mesh.material.opacity = lerp(1, 0.5 + Math.sin(t * 3.5 + i * 0.9) * 0.2, ghostness);
     } else {
       mesh.material.transparent = false;
       mesh.material.opacity = 1;
     }
 
-    // Infra: glowing edges
     const infraness = (currentR === 'infra' ? 1 - bleed : 0) + (nr === 'infra' ? bleed : 0);
     if (b.edges) {
-      b.edges.material.opacity    = lerp(0.15, 0.88, infraness);
-      const edgeTarget = infraness > 0.5 ? 0x00FFFF : 0x000000;
-      b.edges.material.color.lerp(new THREE.Color(edgeTarget), 0.07);
+      b.edges.material.opacity = lerp(0.15, 0.88, infraness);
+      b.edges.material.color.lerp(new THREE.Color(infraness > 0.5 ? 0x00FFFF : 0x000000), 0.07);
     }
   });
 
-  // Ambient light tracks sky color
   ambLight.color.lerp(new THREE.Color(ENV[currentR].sky), 0.04);
   ambLight.intensity = lerp(ambLight.intensity, ENV[currentR].amb, 0.04);
 
