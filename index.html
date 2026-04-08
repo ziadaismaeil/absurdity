@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVERLAP CITY</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { overflow: hidden; background: #000; font-family: 'Courier New', monospace; color: white; }
+
+/* ── Top bar ─────────────────────────────────────────── */
+#topbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px; gap: 8px; z-index: 100;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, transparent 100%);
+  pointer-events: none;
+}
+.r-btn {
+  pointer-events: all;
+  padding: 7px 15px;
+  border: 1.5px solid;
+  background: rgba(0,0,0,0.55);
+  cursor: pointer;
+  font: 10px/1 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 0.25s, opacity 0.25s;
+  border-radius: 2px;
+}
+.r-btn:hover { opacity: 0.75; }
+.r-btn[data-r="tourist"] { color: #FFD580; border-color: #FFD580; }
+.r-btn[data-r="local"]   { color: #7EC8A0; border-color: #7EC8A0; }
+.r-btn[data-r="ghost"]   { color: #CC88EE; border-color: #CC88EE; }
+.r-btn[data-r="infra"]   { color: #40CFFF; border-color: #40CFFF; }
+.r-btn[data-r="feeling"] { color: #FF7799; border-color: #FF7799; }
+.r-btn.active[data-r="tourist"] { background: rgba(255,213,128,0.22); }
+.r-btn.active[data-r="local"]   { background: rgba(126,200,160,0.22); }
+.r-btn.active[data-r="ghost"]   { background: rgba(204,136,238,0.22); }
+.r-btn.active[data-r="infra"]   { background: rgba(64,207,255,0.22); }
+.r-btn.active[data-r="feeling"] { background: rgba(255,119,153,0.22); }
+
+/* ── Title ───────────────────────────────────────────── */
+#title-block {
+  position: fixed; top: 14px; left: 16px; z-index: 100; pointer-events: none;
+}
+#title-block h1 {
+  font-size: 17px; letter-spacing: 5px; font-weight: normal;
+  text-shadow: 0 0 30px rgba(255,255,255,0.4);
+}
+#r-desc {
+  font-size: 9px; letter-spacing: 2px; color: #888;
+  margin-top: 5px; line-height: 1.6; max-width: 210px;
+  transition: color 0.6s;
+}
+
+/* ── Info panel ──────────────────────────────────────── */
+#info-panel {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  width: 250px; background: rgba(0,0,0,0.88);
+  border: 1px solid #2a2a2a; padding: 18px;
+  z-index: 100; display: none; line-height: 1.8;
+}
+#info-panel h3 {
+  font-size: 8px; letter-spacing: 3px; color: #444;
+  margin-bottom: 14px; padding-bottom: 8px;
+  border-bottom: 1px solid #1e1e1e;
+}
+.i-row { font-size: 10px; margin-bottom: 5px; display: flex; gap: 6px; }
+.i-tag { font-size: 8px; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; opacity: 0.8; }
+.i-val { color: #bbb; }
+#close-btn {
+  position: absolute; top: 8px; right: 10px;
+  background: none; border: none; color: #444;
+  cursor: pointer; font: 16px 'Courier New', monospace;
+}
+#close-btn:hover { color: #fff; }
+
+/* ── Bottom bar ──────────────────────────────────────── */
+#bottombar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center;
+  gap: 24px; padding: 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  z-index: 100; pointer-events: none;
+}
+#blend-wrap {
+  pointer-events: all;
+  display: flex; align-items: center; gap: 10px;
+}
+.b-label { font-size: 9px; letter-spacing: 2px; color: #555; }
+#blend-slider {
+  -webkit-appearance: none;
+  width: 180px; height: 2px;
+  background: #2a2a2a; cursor: pointer; outline: none;
+}
+#blend-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px; height: 13px;
+  background: #777; border-radius: 50%;
+}
+#hint { font-size: 9px; letter-spacing: 1px; color: #333; pointer-events: none; }
+
+/* ── Floating labels ─────────────────────────────────── */
+#labels { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
+.blabel {
+  position: absolute; font-size: 9px; letter-spacing: 1px;
+  background: rgba(0,0,0,0.65); padding: 2px 7px;
+  border-left: 2px solid; white-space: nowrap;
+  transform: translateX(-50%);
+  opacity: 0; transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+/* ── Constraint panel ────────────────────────────────── */
+#meta-btn {
+  position: fixed; bottom: 50px; left: 16px;
+  font: 9px/1 'Courier New', monospace;
+  letter-spacing: 3px; color: #333; cursor: pointer;
+  z-index: 100; background: none; border: none;
+  text-transform: uppercase; transition: color 0.3s;
+  writing-mode: vertical-lr;
+}
+#meta-btn:hover { color: #888; }
+#meta-panel {
+  position: fixed; left: 40px; top: 50%; transform: translateY(-50%);
+  width: 270px; background: rgba(0,0,0,0.92);
+  border: 1px solid #1c1c1c; padding: 20px;
+  z-index: 100; display: none;
+  font-size: 9px; line-height: 2.2; color: #555;
+}
+#meta-panel h3 { color: #333; letter-spacing: 3px; margin-bottom: 14px; font-size: 9px; }
+.m-el { color: #888; margin-top: 10px; }
+.m-reads { color: #444; padding-left: 10px; font-size: 8px; line-height: 2; }
+</style>
+</head>
+<body>
+
+<div id="title-block">
+  <h1>OVERLAP CITY</h1>
+  <div id="r-desc">the same place / five different worlds</div>
+</div>
+
+<div id="topbar">
+  <button class="r-btn active" data-r="tourist" onclick="setReality('tourist')">TOURIST</button>
+  <button class="r-btn"        data-r="local"   onclick="setReality('local')">LOCAL</button>
+  <button class="r-btn"        data-r="ghost"   onclick="setReality('ghost')">GHOST</button>
+  <button class="r-btn"        data-r="infra"   onclick="setReality('infra')">INFRA</button>
+  <button class="r-btn"        data-r="feeling" onclick="setReality('feeling')">FEELING</button>
+</div>
+
+<div id="labels"></div>
+
+<div id="info-panel">
+  <button id="close-btn" onclick="document.getElementById('info-panel').style.display='none'">×</button>
+  <h3>ALL REALITIES OF THIS PLACE</h3>
+  <div class="i-row"><span class="i-tag" style="color:#FFD580">TOURIST</span> <span class="i-val" id="i-tourist"></span></div>
+  <div class="i-row"><span class="i-tag" style="color:#7EC8A0">LOCAL</span>   <span class="i-val" id="i-local"></span></div>
+  <div class="i-row"><span class="i-tag" style="color:#CC88EE">GHOST</span>   <span class="i-val" id="i-ghost"></span></div>
+  <div class="i-row"><span class="i-tag" style="color:#40CFFF">INFRA</span>   <span class="i-val" id="i-infra"></span></div>
+  <div class="i-row"><span class="i-tag" style="color:#FF7799">FEELING</span> <span class="i-val" id="i-feeling"></span></div>
+</div>
+
+<button id="meta-btn" onclick="toggleMeta()">CONSTRAINT MACHINE</button>
+
+<div id="meta-panel">
+  <h3>EVERY ELEMENT / MULTIPLE READS</h3>
+  <div class="m-el">THE BUILDINGS</div>
+  <div class="m-reads">→ landmarks / memories / ruins / nodes / affects</div>
+  <div class="m-el">THE GROUND</div>
+  <div class="m-reads">→ road / soil / substrate / data floor / emotional terrain</div>
+  <div class="m-el">THE GRID</div>
+  <div class="m-reads">→ city plan / prison bars / neural net / musical staff / memory map</div>
+  <div class="m-el">THE FOG</div>
+  <div class="m-reads">→ weather / forgetting / privacy / signal loss / numbness</div>
+  <div class="m-el">THE CAMERA</div>
+  <div class="m-reads">→ tourist viewfinder / local gaze / surveillance / ghost sight / empathy lens</div>
+  <div class="m-el">THE HEIGHT</div>
+  <div class="m-reads">→ floors / importance / age / data load / emotional weight</div>
+  <div class="m-el">THE COLOR</div>
+  <div class="m-reads">→ materials / familiarity / spectral residue / signal type / raw affect</div>
+  <div class="m-el">THE BLEED SLIDER</div>
+  <div class="m-reads">→ transition / contamination / blurred identity / signal bleed / empathy</div>
+</div>
+
+<div id="bottombar">
+  <div id="blend-wrap">
+    <span class="b-label">REALITY BLEED</span>
+    <input type="range" id="blend-slider" min="0" max="100" value="0">
+    <span class="b-label" id="blend-next" style="color:#444">→ LOCAL</span>
+  </div>
+  <div id="hint">DRAG to orbit &nbsp;·&nbsp; SCROLL to zoom &nbsp;·&nbsp; CLICK buildings</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+
+// ── Seeded RNG (LCG) ─────────────────────────────────────────────────────────
+let _s = 31337;
+const rng  = () => { _s = Math.imul(1664525, _s) + 1013904223 | 0; return (_s >>> 0) / 2**32; };
+const rngI = (a, b) => Math.floor(rng() * (b - a + 1)) + a;
+const pick  = arr => arr[Math.floor(rng() * arr.length)];
+
+// ── Name banks ───────────────────────────────────────────────────────────────
+const BANK = {
+  tourist: [
+    "Grand Hotel Imperiale","Central Museum","Victory Square","Panorama Tower",
+    "Historic Cathedral","The Famous Bridge","Night Market","The Old Fountain",
+    "Art Gallery","Souvenir District","The Photo Spot","Luxury Spa","Heritage Walk",
+    "Scenic Overlook","The Palace","Clock Tower","Harbour View","The Bronze Statue",
+    "Walking Tour Start","Rooftop Bar"
+  ],
+  local: [
+    "where Nadia got married","the building they tore down in '98","Uncle Petros's corner",
+    "where the flood reached","Marta's bakery (closed)","the alley with the cats",
+    "where we slept through the blackout","grandmother's old street","where the market was",
+    "the wall they painted over","the good coffee place, RIP","everyone cuts through here",
+    "the kids' football pitch","where the riot started","the forgotten garden",
+    "Mrs. Ozan's roof","the shortcut everyone pretends not to know","the tree that used to be here",
+    "where the stray dog lived","the corner that smells like rain"
+  ],
+  ghost: [
+    "Factory No. 3 (1924–1971)","Ottoman Garrison (1650s)","Plague Memorial (1348)",
+    "First Cinema Hall (1911)","Workers' Housing (1952)","Jewish Quarter (demolished 1942)",
+    "Roman Forum (buried 60m down)","Great Fire Site (1887)","Resistance HQ (1943–45)",
+    "Printing House (1820–1964)","Public Bathhouse (1890s)","Monastery Grounds (1200–1850)",
+    "Field Hospital (WWI)","First Airport Terminal (1935)","The Flood Line (1963)",
+    "Mass Grave (unmarked)","Gladiator Arena (buried)","Slave Market (1400s)",
+    "Execution Square (repaved)","The Palace Before This One"
+  ],
+  infra: [
+    "Node A-7 / Substation 12","Water Main Junction W-4","Fiber Optic Hub",
+    "Traffic Control Zone C","Sewage Processing Node","Emergency Services Sector 4",
+    "Power Grid Distribution","Gas Pipeline Intersection","Data Center Cluster",
+    "Waste Collection Route 7","Storm Drain Basin","Telecom Tower Base",
+    "Metro Ventilation Shaft","Heat Exchange Unit","Surveillance Cluster",
+    "Load Zone LB-2","Fire Suppression Grid","Radiation Monitor A","Soil Sensor Array","CCTV Hub"
+  ],
+  feeling: [
+    "Longing (pop. 847)","Unease (threshold)","Collective Joy",
+    "Private Grief","Anonymous Lust","Nostalgic Residue",
+    "Ambient Dread","Unexpected Warmth","Territorial Anger",
+    "Borrowed Comfort","Civic Pride (fading)","Shared Shame (unnamed)",
+    "Hope (conditional)","Boredom (concentrated)","Displaced Tenderness",
+    "Displaced Rage","The Weight of Not Saying","Guilt By Proximity",
+    "Joy No One Claims","A Feeling Without a Name"
+  ]
+};
+
+const FEELING_HEX = [
+  0x2244BB,0x884400,0xEECC00,0x112244,0xFF1166,0x9977DD,
+  0x330800,0xFF8833,0xFF2200,0x77BBAA,0x0077EE,0x441111,
+  0x00EE77,0x888888,0xEE77AA,0xAA1100,0x334455,0x550033,
+  0x005522,0x222222
+];
+
+// ── City generation ───────────────────────────────────────────────────────────
+const GRID = 14, CELL = 5;
+const city = [];
+
+for (let x = 0; x < GRID; x++) {
+  for (let z = 0; z < GRID; z++) {
+    const base = rng() * 5.5 + 1.2;
+    const fi   = (x * 9 + z * 5) % FEELING_HEX.length;
+    city.push({
+      wx: (x - GRID/2 + 0.5) * CELL,
+      wz: (z - GRID/2 + 0.5) * CELL,
+      heights: {
+        tourist: base * (rng() * 0.5 + 0.7),
+        local:   base * (rng() * 0.3 + 0.85),
+        ghost:   base * (rng() * 2.8 + 0.15),
+        infra:   base * (rng() * 0.2  + 0.9),
+        feeling: base * (rng() * 1.6 + 0.25),
+      },
+      colors: {
+        tourist: new THREE.Color().setHSL(rng()*0.1+0.04,   0.55, 0.48+rng()*0.28),
+        local:   new THREE.Color().setHSL(rng()*0.15+0.27,  0.22, 0.38+rng()*0.22),
+        ghost:   new THREE.Color().setHSL(rng()*0.08+0.73,  0.45, 0.42+rng()*0.3),
+        infra:   new THREE.Color().setHSL(rng()*0.06+0.52,  0.9,  0.28+rng()*0.28),
+        feeling: new THREE.Color(FEELING_HEX[fi]),
+      },
+      names: {
+        tourist: pick(BANK.tourist),
+        local:   pick(BANK.local),
+        ghost:   pick(BANK.ghost),
+        infra:   pick(BANK.infra),
+        feeling: pick(BANK.feeling),
+      },
+      mesh: null,
+      edges: null,
+    });
+  }
+}
+
+// ── Three.js scene ───────────────────────────────────────────────────────────
+const scene    = new THREE.Scene();
+const camera   = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 500);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+// Ground
+const gndMat  = new THREE.MeshLambertMaterial({ color: 0x666666 });
+const gndMesh = new THREE.Mesh(new THREE.PlaneGeometry(GRID*CELL*2, GRID*CELL*2), gndMat);
+gndMesh.rotation.x = -Math.PI/2;
+gndMesh.receiveShadow = true;
+scene.add(gndMesh);
+
+// Grid lines
+const gridHelper = new THREE.GridHelper(GRID*CELL, GRID, 0x333333, 0x222222);
+scene.add(gridHelper);
+
+// Lights
+const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambLight);
+const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+sun.position.set(40, 90, 30);
+sun.castShadow = true;
+scene.add(sun);
+
+// Fog & sky
+scene.fog = new THREE.Fog(0x87CEEB, 55, 160);
+renderer.setClearColor(0x87CEEB);
+
+// ── Build meshes ─────────────────────────────────────────────────────────────
+const allMeshes = [];
+city.forEach((b, i) => {
+  const geo  = new THREE.BoxGeometry(CELL * 0.77, 1, CELL * 0.77);
+  const mat  = new THREE.MeshLambertMaterial({ color: b.colors.tourist });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(b.wx, b.heights.tourist / 2, b.wz);
+  mesh.scale.y = b.heights.tourist;
+  mesh.castShadow = true;
+  mesh.userData.idx = i;
+  scene.add(mesh);
+  b.mesh = mesh;
+  allMeshes.push(mesh);
+
+  const eMat  = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.18 });
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), eMat);
+  mesh.add(edges);
+  b.edges = edges;
+});
+
+// ── Reality definitions ───────────────────────────────────────────────────────
+const REALITIES = ['tourist','local','ghost','infra','feeling'];
+const R_COLOR   = { tourist:'#FFD580', local:'#7EC8A0', ghost:'#CC88EE', infra:'#40CFFF', feeling:'#FF7799' };
+const R_DESC    = {
+  tourist:  'city as spectacle — curated, legible, photogenic',
+  local:    'city as body memory — worn paths, private meanings',
+  ghost:    'city as palimpsest — every place is also its past',
+  infra:    'city as system — flows, nodes, invisible forces',
+  feeling:  'city as emotion — collective affect, raw presence',
+};
+const ENV = {
+  tourist: { sky: 0x87CEEB, fog: 0xB8D8F0, fogN: 55, fogF: 160, gnd: 0x777777, amb: 0.5,  sunC: 0xfff0dd },
+  local:   { sky: 0x2C3C4E, fog: 0x1a2833, fogN: 35, fogF: 110, gnd: 0x2a3322, amb: 0.3,  sunC: 0xddeecc },
+  ghost:   { sky: 0x100018, fog: 0x0d0015, fogN: 18, fogF: 75,  gnd: 0x080010, amb: 0.15, sunC: 0xaa66ee },
+  infra:   { sky: 0x000E1A, fog: 0x000e1a, fogN: 22, fogF: 90,  gnd: 0x00101f, amb: 0.12, sunC: 0x00ccff },
+  feeling: { sky: 0x060010, fog: 0x060010, fogN: 18, fogF: 75,  gnd: 0x040008, amb: 0.08, sunC: 0xff3388 },
+};
+
+let currentR = 'tourist';
+let bleed = 0;
+
+function nextR() { return REALITIES[(REALITIES.indexOf(currentR) + 1) % REALITIES.length]; }
+
+function setReality(r) {
+  currentR = r;
+  document.querySelectorAll('.r-btn').forEach(b => b.classList.toggle('active', b.dataset.r === r));
+  document.getElementById('r-desc').textContent = R_DESC[r];
+  document.getElementById('r-desc').style.color = R_COLOR[r];
+  document.getElementById('blend-next').textContent = '→ ' + nextR().toUpperCase();
+  document.getElementById('blend-next').style.color = R_COLOR[nextR()];
+
+  const e = ENV[r];
+  renderer.setClearColor(e.sky);
+  scene.fog.color.setHex(e.fog);
+  scene.fog.near = e.fogN;
+  scene.fog.far  = e.fogF;
+  gndMat.color.setHex(e.gnd);
+  sun.color.setHex(e.sunC);
+}
+
+document.getElementById('blend-slider').addEventListener('input', e => {
+  bleed = e.target.value / 100;
+  document.getElementById('blend-next').textContent = '→ ' + nextR().toUpperCase();
+  document.getElementById('blend-next').style.color = R_COLOR[nextR()];
+});
+
+// ── Camera controls ───────────────────────────────────────────────────────────
+let sph = { r: 68, theta: Math.PI * 0.32, phi: Math.PI * 0.27 };
+let dragging = false, lastM = {x:0,y:0}, downM = {x:0,y:0};
+
+function updateCam() {
+  camera.position.set(
+    sph.r * Math.sin(sph.phi) * Math.sin(sph.theta),
+    sph.r * Math.cos(sph.phi),
+    sph.r * Math.sin(sph.phi) * Math.cos(sph.theta)
+  );
+  camera.lookAt(0, 4, 0);
+}
+updateCam();
+
+renderer.domElement.addEventListener('mousedown', e => {
+  dragging = true;
+  lastM = downM = { x: e.clientX, y: e.clientY };
+});
+renderer.domElement.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  sph.theta -= (e.clientX - lastM.x) * 0.006;
+  sph.phi    = Math.max(0.07, Math.min(Math.PI/2.05, sph.phi + (e.clientY - lastM.y) * 0.006));
+  lastM = { x: e.clientX, y: e.clientY };
+  updateCam();
+});
+renderer.domElement.addEventListener('mouseup', () => { dragging = false; });
+renderer.domElement.addEventListener('wheel', e => {
+  sph.r = Math.max(14, Math.min(160, sph.r + e.deltaY * 0.06));
+  updateCam();
+}, { passive: true });
+
+// ── Raycasting & info panel ───────────────────────────────────────────────────
+const rc = new THREE.Raycaster();
+const mv = new THREE.Vector2();
+
+renderer.domElement.addEventListener('click', e => {
+  if (Math.hypot(e.clientX - downM.x, e.clientY - downM.y) > 7) return;
+  mv.set((e.clientX/innerWidth)*2-1, -(e.clientY/innerHeight)*2+1);
+  rc.setFromCamera(mv, camera);
+  const hits = rc.intersectObjects(allMeshes);
+  if (hits.length) showInfo(city[hits[0].object.userData.idx]);
+});
+
+function showInfo(b) {
+  document.getElementById('info-panel').style.display = 'block';
+  document.getElementById('i-tourist').textContent = b.names.tourist;
+  document.getElementById('i-local').textContent   = b.names.local;
+  document.getElementById('i-ghost').textContent   = b.names.ghost;
+  document.getElementById('i-infra').textContent   = b.names.infra;
+  document.getElementById('i-feeling').textContent = b.names.feeling;
+}
+
+// ── Floating labels ───────────────────────────────────────────────────────────
+const labelContainer = document.getElementById('labels');
+const labelEls = city.map((b, i) => {
+  const el = document.createElement('div');
+  el.className = 'blabel';
+  el.style.color = R_COLOR.tourist;
+  el.style.borderLeftColor = R_COLOR.tourist;
+  el.textContent = b.names.tourist;
+  labelContainer.appendChild(el);
+  return el;
+});
+
+const _v3 = new THREE.Vector3();
+
+function updateLabels() {
+  const sorted = city
+    .map((b, i) => ({ b, i, d: camera.position.distanceTo(_v3.set(b.wx, 0, b.wz)) }))
+    .sort((a, b) => a.d - b.d);
+
+  city.forEach((_, i) => { labelEls[i].style.opacity = '0'; });
+
+  sorted.slice(0, 14).forEach(({ b, i, d }) => {
+    const h = b.mesh.scale.y;
+    _v3.set(b.wx, h + 0.6, b.wz).project(camera);
+    if (_v3.z >= 1) return;
+    const sx = (_v3.x * 0.5 + 0.5) * innerWidth;
+    const sy = (-_v3.y * 0.5 + 0.5) * innerHeight;
+    if (sx < 0 || sx > innerWidth || sy < 0 || sy > innerHeight) return;
+
+    const el = labelEls[i];
+    el.style.left = sx + 'px';
+    el.style.top  = sy + 'px';
+    el.textContent = b.names[currentR];
+    el.style.color = R_COLOR[currentR];
+    el.style.borderLeftColor = R_COLOR[currentR];
+    el.style.opacity = Math.max(0, Math.min(1, 1 - (d - 18) / 38)).toFixed(2);
+  });
+}
+
+// ── Constraint machine panel ──────────────────────────────────────────────────
+let metaOpen = false;
+function toggleMeta() {
+  metaOpen = !metaOpen;
+  document.getElementById('meta-panel').style.display = metaOpen ? 'block' : 'none';
+}
+
+// ── Animation loop ────────────────────────────────────────────────────────────
+const clock = new THREE.Clock();
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  const nr = nextR();
+
+  city.forEach((b, i) => {
+    const mesh = b.mesh;
+
+    // Height: lerp current → next via bleed
+    const targetH = lerp(b.heights[currentR], b.heights[nr], bleed);
+    mesh.scale.y  += (targetH - mesh.scale.y) * 0.075;
+    mesh.position.y = mesh.scale.y / 2;
+
+    // Color: lerp toward blended target
+    const blended = b.colors[currentR].clone().lerp(b.colors[nr], bleed);
+    mesh.material.color.lerp(blended, 0.065);
+
+    // Feeling: buildings breathe
+    if (currentR === 'feeling' || (nr === 'feeling' && bleed > 0.1)) {
+      const breathe = lerp(1, 1 + Math.sin(t * 1.4 + i * 0.5) * 0.07, currentR === 'feeling' ? 1 - bleed : bleed);
+      mesh.scale.x = lerp(mesh.scale.x, breathe, 0.06);
+      mesh.scale.z = lerp(mesh.scale.z, breathe, 0.06);
+    } else {
+      mesh.scale.x = lerp(mesh.scale.x, 1, 0.05);
+      mesh.scale.z = lerp(mesh.scale.z, 1, 0.05);
+    }
+
+    // Ghost: flicker opacity
+    const ghostness = (currentR === 'ghost' ? 1 - bleed : 0) + (nr === 'ghost' ? bleed : 0);
+    if (ghostness > 0.01) {
+      mesh.material.transparent = true;
+      mesh.material.opacity = lerp(1, 0.55 + Math.sin(t * 3.5 + i * 0.9) * 0.2, ghostness);
+    } else {
+      mesh.material.transparent = false;
+      mesh.material.opacity = 1;
+    }
+
+    // Infra: glowing edges
+    const infraness = (currentR === 'infra' ? 1 - bleed : 0) + (nr === 'infra' ? bleed : 0);
+    if (b.edges) {
+      b.edges.material.opacity    = lerp(0.15, 0.88, infraness);
+      const edgeTarget = infraness > 0.5 ? 0x00FFFF : 0x000000;
+      b.edges.material.color.lerp(new THREE.Color(edgeTarget), 0.07);
+    }
+  });
+
+  // Ambient light tracks sky color
+  ambLight.color.lerp(new THREE.Color(ENV[currentR].sky), 0.04);
+  ambLight.intensity = lerp(ambLight.intensity, ENV[currentR].amb, 0.04);
+
+  updateLabels();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

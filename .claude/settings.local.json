@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(surge --version)",
+      "Bash(netlify --version)",
+      "Bash(vercel --version)",
+      "Bash(gh --version)",
+      "Bash(git -C \"D:/Users/ziad/Desktop/Github/absurdity\" remote -v)",
+      "Read(//c/Users/ziada/**)",
+      "Bash(npx:*)",
+      "Bash(echo \"serve restarted, pid=$!\")",
+      "Bash(curl -s http://localhost:3131)",
+      "Bash(ssh:*)",
+      "Bash(git -C \"D:/Users/ziad/Desktop/Github/isovist app\" remote -v)",
+      "Bash(git -C \"D:/Users/ziad/Desktop/Github/isovist app\" log --oneline -5)"
+    ]
+  }
+}
